@@ -7,6 +7,19 @@ function Home() {
   const [isURLValid, setIsURLValid] = React.useState(true);
   const [url, setURL] = React.useState({ long: "", short: "" });
 
+  async function submitUrl(url) {
+    const res = await fetch("/api/shorten", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(url),
+    });
+    const data = await res.json();
+    console.log(data);
+    return data.data.createURL;
+  }
+
   return (
     <main className="grid place-items-center h-screen">
       <div className="bg-cyan-900 w-full grid place-content-center py-20">
@@ -27,6 +40,9 @@ function Home() {
                   if (e.key === "Enter") {
                     if (isURL(e.target.value)) {
                       setIsURLValid(true);
+
+                      const url = await submitUrl({ longUrl: e.target.value });
+                      setURL(url);
                     } else {
                       setIsURLValid(false);
                     }
