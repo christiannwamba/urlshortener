@@ -5,6 +5,15 @@ export default async function handler(req, res) {
   const GRAPHQL_KEY = process.env.GRAPHQL_KEY;
   const shortCode = customAlphabet(urlAlphabet, 5)();
 
+  const query = /* GraphQL */ `
+    mutation CREATE_URL($input: CreateURLInput!) {
+      createURL(input: $input) {
+        long
+        short
+      }
+    }
+  `;
+
   const options = {
     method: "POST",
     headers: {
