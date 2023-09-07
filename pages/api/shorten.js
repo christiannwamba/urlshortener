@@ -5,6 +5,15 @@ export default async function handler(req, res) {
   const GRAPHQL_KEY = process.env.GRAPHQL_KEY;
   const shortCode = customAlphabet(urlAlphabet, 5)();
 
+  const options = {
+    method: "POST",
+    headers: {
+      "x-api-key": GRAPHQL_KEY,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query, variables }),
+  };
+
   const response = {};
   try {
     const res = await fetch(GRAPHQL_ENDPOINT, options);
