@@ -10,6 +10,17 @@ export async function getServerSideProps(context) {
   const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT;
   const GRAPHQL_KEY = process.env.GRAPHQL_KEY;
 
+  const query = /* GraphQL */ `
+    query LIST_URLS($input: ModelURLFilterInput!) {
+      listURLS(filter: $input) {
+        items {
+          long
+          short
+        }
+      }
+    }
+  `;
+
   const options = {
     method: "POST",
     headers: {
@@ -18,7 +29,7 @@ export async function getServerSideProps(context) {
     },
     body: JSON.stringify({ query, variables }),
   };
-  
+
   const res = await fetch(GRAPHQL_ENDPOINT, options);
   const data = await res.json();
   const url = data.data.listURLS.items[0];
