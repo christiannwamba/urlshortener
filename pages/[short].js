@@ -21,6 +21,10 @@ export async function getServerSideProps(context) {
     }
   `;
 
+  const variables = {
+    input: { short: { eq: context.params.short } },
+  };
+
   const options = {
     method: "POST",
     headers: {
