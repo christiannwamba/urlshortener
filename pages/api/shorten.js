@@ -10,6 +10,17 @@ export default async function handler(req, res) {
     const res = await fetch(GRAPHQL_ENDPOINT, options);
     response.data = await res.json();
     response.statusCode = 200;
-  } catch (error) {}
+    if (response.data.errors) response.statusCode = 400;
+  } catch (error) {
+    response.statusCode = 400;
+    response.data = {
+      errors: [
+        {
+          message: error.message,
+          stack: error.stack,
+        },
+      ],
+    };
+  }
   res.status(response.statusCode).json(response.data);
 }
