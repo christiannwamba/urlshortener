@@ -5,6 +5,7 @@ import isURL from "validator/lib/isURL";
 
 function Home() {
   const [isURLValid, setIsURLValid] = React.useState(true);
+  const [url, setURL] = React.useState({ long: "", short: "" });
 
   return (
     <main className="grid place-items-center h-screen">
