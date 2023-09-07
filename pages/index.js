@@ -56,12 +56,11 @@ function Home() {
               </div>
             </div>
 
-            {true && (
+            {url.short.length > 0 && (
               <div className="flex gap-4 mt-6 p-5 rounded-md border border-cyan-500 bg-cyan-50 items-center">
-                <p className="line-clamp-1 text-gray-600">Long URL</p>
-
+                <p className="line-clamp-1 text-gray-600">{url.long}</p>
                 <p className="text-cyan-700">
-                  <Link href={`/`}> rb.gy/shorturl</Link>
+                  <Link href={`/${url.short}`}> lg.sh/{url.short}</Link>
                 </p>
               </div>
             )}
