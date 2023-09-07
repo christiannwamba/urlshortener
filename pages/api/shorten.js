@@ -14,6 +14,13 @@ export default async function handler(req, res) {
     }
   `;
 
+  const variables = {
+    input: {
+      long: req.body.longUrl,
+      short: shortCode,
+    },
+  };
+
   const options = {
     method: "POST",
     headers: {
